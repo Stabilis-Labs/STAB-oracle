@@ -28,14 +28,14 @@ mod oracle {
 
     extern_blueprint! {
         //"package_sim1pkgxxxxxxxxxpackgexxxxxxxxx000726633226xxxxxxxxxlk8hc9", //simulator package, uncomment to run tests
-        //"package_tdx_2_1phdppf684w8r4za9pwgafzc0zpmsvt7xlmyx8r7kzq2dlgns9k5war", //stokenet morpher package
-        "package_rdx1p5xvvessslnpnfam9weyzldlxr7q06gen2t3d3waa0x760g7jwxhkd", //mainnet morpher package
+        //"package_tdx_2_1phrthm8neequrhdg8jxvvwd8xazccuaa8u3ufyemysade0ckv88an2", //stokenet morpher package
+        "package_rdx1pka62r6e9754snp524ng3kfrkxma6qdxhzw86j7ka5nnl9m75nagmp", //mainnet morpher package
         MorpherOracle {
             fn check_price_input(&self, message: String, signature: String) -> PriceMessage;
         }
 
-        // oracle address for stokenet: component_tdx_2_1cryq46xl9jxej3v8dr6q0lpnzhs4knlg6x2en6gynahghxztdvdp74
-        // oracle address for mainnet: component_rdx1cp07hrz378zfugcf6h8f9usct4zqx7rdgjhxjwphkzxyv9h7l2q04s
+        // oracle address for stokenet: component_tdx_2_1cpt6kp3mqkds5uy858mqedwfglhsw25lhey59ev45ayce4yfsghf90
+        // oracle address for mainnet: component_rdx1cpuqchky58ualnunh485cqne7p6dkepuwq0us2t5n89mz32k6pfppz
     }
 
     extern_blueprint! {
@@ -113,8 +113,8 @@ mod oracle {
                 }
             }
             if price_is_xrd {
-                let lsu_multiplier: Decimal =
-                    LSU_POOL.get_dex_valuation_xrd() / LSU_POOL.get_liquidity_token_total_supply();
+                let lsu_multiplier: Decimal = //dec!("1.1"); (uncomment for Stokenet)
+                LSU_POOL.get_dex_valuation_xrd() / LSU_POOL.get_liquidity_token_total_supply();
                 self.prices[1].1 = price_message.price * lsu_multiplier;
                 self.prices[1].2 = price_message.created_at;
             }
